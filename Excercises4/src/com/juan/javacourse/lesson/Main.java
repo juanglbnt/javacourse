@@ -1,13 +1,20 @@
 package com.juan.javacourse.lesson;
 
-import excercises.SumAverageRunningInt;
+import excercises.Excercises4;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        SumAverageRunningInt oneSum = new SumAverageRunningInt();
+        Excercises4 excercises4 = new Excercises4();
 
-        oneSum.sumAverage();
+        excercises4.sumAverage();
+        excercises4.sumAverageUsingWhile();
+        excercises4.sumAverageUsingDoWhile();
+        excercises4.sumAverageRange();
+        excercises4.calculateSumSquares();
+        excercises4.CalculateSumOddEven();
+        excercises4.production();
+        excercises4.harmonicSum();
     }
 }
