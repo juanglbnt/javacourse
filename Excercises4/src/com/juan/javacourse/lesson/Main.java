@@ -1,6 +1,6 @@
 package com.juan.javacourse.lesson;
 
-import excercises.Excercises4;
+import excercises.*;
 
 public class Main {
 
@@ -12,9 +12,13 @@ public class Main {
         excercises4.sumAverageUsingWhile();
         excercises4.sumAverageUsingDoWhile();
         excercises4.sumAverageRange();
-        excercises4.calculateSumSquares();
-        excercises4.CalculateSumOddEven();
-        excercises4.production();
-        excercises4.harmonicSum();
+
+        SumSquares.calculateSumSquares();
+        SumOddEven.CalculateSumOddEven();
+        Production.calculateProduction();
+        HarmonicSum.calculateHarmonicSum();
+        ComputePI.calculatePI();
+        CozaLozaWoza.Print();
+
     }
 }
