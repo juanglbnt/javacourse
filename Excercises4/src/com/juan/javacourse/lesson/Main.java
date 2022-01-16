@@ -19,6 +19,10 @@ public class Main {
         HarmonicSum.calculateHarmonicSum();
         ComputePI.calculatePI();
         CozaLozaWoza.Print();
+        CozaLozaWoza.print2();
+
+        Fibonacci.printFibonacci();
+        ExtractDigits.ExtractInReverse();
 
     }
 }
