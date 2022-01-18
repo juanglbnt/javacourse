@@ -26,7 +26,7 @@ public class Main {
         do{
             System.out.println("\n----------------------------------\n0. exit\n1. Sum product min max\n2. circle computation\n3. sphere computation\n4. cylinder computation" +
                     "\n5. swap two integers\n6. income tax calculator\n7. pension contribution calculator\n8. sales tax calculator\n9. reverse int" +
-                    "\n10. sum of digits\n11. input validation \n");
+                    "\n10. sum of digits\n11. input validation\n12. average with input validation \n");
             option = scan.nextInt();
 
             switch(option){
