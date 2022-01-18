@@ -25,7 +25,8 @@ public class Main {
 
         do{
             System.out.println("\n----------------------------------\n0. exit\n1. Sum product min max\n2. circle computation\n3. sphere computation\n4. cylinder computation" +
-                    "\n5. swap two integers\n6. income tax calculator\n7. pension contribution calculator\n8. sales tax calculator \n");
+                    "\n5. swap two integers\n6. income tax calculator\n7. pension contribution calculator\n8. sales tax calculator\n9. reverse int" +
+                    "\n10. sum of digits\n11. input validation \n");
             option = scan.nextInt();
 
             switch(option){
@@ -52,6 +53,18 @@ public class Main {
                     break;
                 case 8:
                     SalesTaxCalculator.taxSales();
+                    break;
+                case 9:
+                    ReverseInt.reverse();
+                    break;
+                case 10:
+                    SumOfDigitsInt.sumDigits();
+                    break;
+                case 11:
+                    InputValidation.validate();
+                    break;
+                case 12:
+                    AverageWithInputValidation.calculateAverage();
                     break;
                 default:
                     break;
