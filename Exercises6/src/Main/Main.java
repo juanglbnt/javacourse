@@ -44,5 +44,6 @@ public class Main {
                     break;
             }
         }while(option > 0);
+        System.out.println("THANK YOU");
     }
 }
