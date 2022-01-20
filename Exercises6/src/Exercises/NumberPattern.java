@@ -2,9 +2,9 @@ package Exercises;
 
 import java.util.Scanner;
 
-public class TriangularPattern {
-    static int size;
+public class NumberPattern {
     static Scanner in = new Scanner(System.in);
+    static int size;
 
     public static int getSize(){
         System.out.print("enter the size > ");
@@ -14,11 +14,16 @@ public class TriangularPattern {
 
     public static String printPatternA(int size){
         String patternA = "";
+        int number;
 
         for(int row = 1; row <= size; row++){
+
+            number = 1;
+
             for(int col = 1; col <= size; col++){
                 if(row >= col){
-                    patternA += " * ";
+                    patternA += " " + number + " ";
+                    number++;
                 }
             }
             patternA += "\n";
@@ -29,11 +34,16 @@ public class TriangularPattern {
 
     public static String printPatternB(int size){
         String patternB = "";
+        int number;
 
         for(int row = 1; row <= size; row++){
+
+            number = 1;
+
             for(int col = 1; col <= size; col++){
                 if(row + col <= size + 1){
-                    patternB += " * ";
+                    patternB += " " + number + " ";
+                    number++;
                 }
             }
             patternB += "\n";
@@ -43,11 +53,16 @@ public class TriangularPattern {
 
     public static String printPatternC(int size){
         String patternC = "";
+        int number;
 
         for(int row = 1; row <= size; row++){
+
+            number = 1;
+
             for(int col = 1; col <= size; col++){
                 if(row <= col){
-                    patternC += " * ";
+                    patternC += " " + number + " ";
+                    number++;
                 }else{
                     patternC += "   ";
                 }
@@ -60,11 +75,16 @@ public class TriangularPattern {
 
     public static String printPatternD(int size){
         String patternD = "";
+        int number;
 
         for(int row = 1; row <= size; row++){
+
+            number = 1;
+
             for(int col = 1; col <= size; col++){
                 if(row + col >= size+1){
-                    patternD += " * ";
+                    patternD += " " + number + " ";
+                    number++;
                 }else{
                     patternD += "   ";
                 }
@@ -74,7 +94,7 @@ public class TriangularPattern {
         return patternD;
     }
 
-    public static void printPatterns(){
+    public static void printAllPatterns(){
         int size = getSize();
         System.out.println(printPatternA(size));
         System.out.println(printPatternB(size));
