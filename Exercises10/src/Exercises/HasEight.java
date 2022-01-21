@@ -3,17 +3,8 @@ package Exercises;
 import java.util.Scanner;
 
 public class HasEight {
-    Scanner in = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        HasEight hasEight = new HasEight();
-
-        hasEight.magicSum();
-
-    }
-
-    public boolean hasEight(int number){
+    public static boolean hasEight(int number){
         String num = "";
         int length;
         boolean isValid = false;
@@ -30,7 +21,8 @@ public class HasEight {
         return isValid;
     }
 
-    public void magicSum(){
+    public static void magicSum(){
+        Scanner in = new Scanner(System.in);
         int number = 0;
         int magicSum = 0;
 
