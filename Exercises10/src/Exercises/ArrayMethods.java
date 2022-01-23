@@ -2,7 +2,6 @@ package Exercises;
 
 public class ArrayMethods {
 
-
     public static boolean contains(int[] arrayOfNumbers, int key){
         int arraySize = arrayOfNumbers.length;
         boolean contains = false;
@@ -130,6 +129,22 @@ public class ArrayMethods {
         }else{
             System.out.print("the arrays have not the same size, couldn't be swaped");
         }
+    }
+
+    public static void reverseArray(int[] array){
+        int arraySize = array.length;
+        int item1, item2, temp;
+
+        print(array);
+        for(int i = 0, j = arraySize-1; i < j; ++i, --j){
+            item1 = array[i];
+            item2 = array[j];
+            array[i] = item2;
+            array[j] = item1;
+        }
+
+        System.out.print(" reversed is: ");
+        print(array);
     }
 
 }

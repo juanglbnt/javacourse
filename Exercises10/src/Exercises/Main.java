@@ -11,6 +11,7 @@ public class Main {
         int[] nums4 = {1, 8, 4, 2};
         int[] nums5 = {1, 2, 3, 4, 5, 1};
         int[] nums6 = {3, 4, 7, 6, 4, 1};
+        int[] nums7 = {9, 8, 22, 23, 60, 80, 80, 87};
         double[] doubleNumbers = {3.4, 4.5, 6.9, 10.8};
 
 
@@ -19,7 +20,8 @@ public class Main {
 
         do{
             System.out.println("\n0. exit\n1. Exponent\n2. Magic Sum\n3. Print Arrays\n4. arrays to string\n" +
-                    "5. it's odd/even\n6. contains\n7. search\n8. equals\n9. copy\n");
+                    "5. it's odd/even\n6. contains\n7. search\n8. equals\n9. copy" +
+                    "\n10. swap arrays\n11. reverse array\n12. grade statics\n");
             input = in.nextInt();
 
             switch(input){
@@ -87,6 +89,19 @@ public class Main {
                     ArrayMethods.print(nums5);
                     System.out.print(", nums6: ");
                     ArrayMethods.print(nums6);
+                case 11:
+                    ArrayMethods.reverseArray(nums1);
+                    break;
+                case 12:
+                    GradeStatistics statistics = new GradeStatistics();
+                    statistics.computeValues();
+                    break;
+                case 13:
+                    GradeStatistics stat = new GradeStatistics();
+                    stat.makeHistogram(nums7);
+                    break;
+                default:
+                    break;
 
 
             }
