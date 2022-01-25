@@ -9,6 +9,9 @@ public class Memory2 {
     ArrayList<String> memory = new ArrayList<>();
     String[][] matrixMemory = new String[20][10];
     Random random = new Random();
+    int memorySpace = 200;
+    public final String MEMORY_ITEMS = "****";
+    int spaceToStore = 0;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -36,6 +39,7 @@ public class Memory2 {
                 idToDelete = opc.substring(1);
                 obj2.deleteProcess(idToDelete);
                 obj2.fillMatrixMemory();
+                obj2.fitMemory();
                 obj2.printMemory();
             }
             else{
@@ -53,7 +57,7 @@ public class Memory2 {
 
     public void startMemory(){
         for(int i = 0; i < 200; i++){
-            memory.add("****");
+            memory.add(MEMORY_ITEMS);
         }
     }
 
@@ -106,15 +110,23 @@ public class Memory2 {
             listProcess.add(idProcess);
         }
 
-        for(int i = 0; i < listProcess.size(); i++){
-            memory.remove(i);
-            memory.add(idProcess);
+        if(size > memorySpace){
+            System.err.println("memory over flow\nmemory space: " + memorySpace);
+        }else{
+            for(int i = 0; i < listProcess.size(); i++){
+                memory.remove(i);
+                memory.add(idProcess);
+            }
+            memorySpace -= size;
         }
 
         System.out.println("the new process with id: " + idProcess + " and size: " + size +
                 " was store to memory");
+        System.out.println("space in memory = " + memorySpace);
 
     }
+
+    //Application process
 
     public void appProcess(){
         int size = 0;
@@ -138,21 +150,51 @@ public class Memory2 {
             listProcess.add(idProcess);
         }
 
-        for(int i = 0; i < listProcess.size(); i++){
-            memory.remove(i);
-            memory.add(idProcess);
+
+        if(size > memorySpace){
+            System.err.println("memory over flow\nmemory space: " + memorySpace);
+        }else{
+            for(int i = 0; i < listProcess.size(); i++){
+                if(memory.get(i).equalsIgnoreCase(MEMORY_ITEMS)){
+                    memory.remove(i);
+                    memory.add(idProcess);
+                }
+
+            }
+            memorySpace -= size;
         }
 
         System.out.println("the new process with id: " + idProcess + " and size: " + size +
                 " was store to memory");
+        System.out.println("space in memory: " + memorySpace);
 
     }
 
+
+    //delete a process stored in memory
     public void deleteProcess(String id){
         for(int i = 0; i < memory.size(); i++){
             if(memory.get(i).equalsIgnoreCase(id)){
-                memory.set(i, "****");
+                memory.set(i, MEMORY_ITEMS);
             }
+        }
+    }
+
+    //fit the memory to avoid free spaces between processes
+    public void fitMemory(){
+        ArrayList<String> memoryCopy = new ArrayList<>();
+
+        for(int i = 0; i < memory.size(); i++){
+            if(!(memory.get(i).equalsIgnoreCase(MEMORY_ITEMS))){
+                memoryCopy.add(memory.get(i));
+                memory.remove(i);
+                memory.add(MEMORY_ITEMS);
+            }
+        }
+
+        for(int i = 0; i < memoryCopy.size(); i++){
+            memory.remove(i);
+            memory.add(memoryCopy.get(i));
         }
     }
 
