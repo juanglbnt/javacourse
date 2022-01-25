@@ -7,11 +7,10 @@ import java.util.Scanner;
 public class Memory2 {
 
     ArrayList<String> memory = new ArrayList<>();
+    ArrayList<String> memoryCopy = new ArrayList<>();
     String[][] matrixMemory = new String[20][10];
     Random random = new Random();
-    int memorySpace = 200;
     public final String MEMORY_ITEMS = "****";
-    int spaceToStore = 0;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -40,6 +39,7 @@ public class Memory2 {
                 obj2.deleteProcess(idToDelete);
                 obj2.fillMatrixMemory();
                 obj2.fitMemory();
+                obj2.fillMatrixMemory();
                 obj2.printMemory();
             }
             else{
@@ -61,6 +61,7 @@ public class Memory2 {
         }
     }
 
+    //only used to verify the original main memory
     public void showArray(){
         for(int i = 0; i < memory.size(); i++){
             System.out.print(memory.get(i) + " ");
@@ -87,11 +88,24 @@ public class Memory2 {
         }
     }
 
+    public int memoryCurrentSpace(){
+        int space = 0;
+        for(int i = 0; i < memory.size(); i++){
+            if(memory.get(i).equalsIgnoreCase(MEMORY_ITEMS)){
+                space++;
+            }
+        }
+        return space;
+    }
+
     public void systemProcess(){
         int size = 0;
         int id = 0;
         String idProcess = "";
         List<String> listProcess = new ArrayList<>();
+        int memorySpace;
+
+        memorySpace = memoryCurrentSpace();
 
         size = 5 + random.nextInt(16 - 5);
 
@@ -117,23 +131,24 @@ public class Memory2 {
                 memory.remove(i);
                 memory.add(idProcess);
             }
-            memorySpace -= size;
         }
 
+        System.out.println("space in memory = " + memorySpace);
         System.out.println("the new process with id: " + idProcess + " and size: " + size +
                 " was store to memory");
-        System.out.println("space in memory = " + memorySpace);
 
     }
 
     //Application process
-
     public void appProcess(){
         int size = 0;
         int id = 0;
         String idProcess = "";
         List<String> listProcess = new ArrayList<>();
         size = 5 + random.nextInt(16 - 5);
+        int memorySpace;
+
+        memorySpace = memoryCurrentSpace();
 
         idProcess = "a00" + id;
 
@@ -161,40 +176,57 @@ public class Memory2 {
                 }
 
             }
-            memorySpace -= size;
         }
 
+        System.out.println("space in memory: " + memorySpace);
         System.out.println("the new process with id: " + idProcess + " and size: " + size +
                 " was store to memory");
-        System.out.println("space in memory: " + memorySpace);
-
     }
 
 
     //delete a process stored in memory
     public void deleteProcess(String id){
-        for(int i = 0; i < memory.size(); i++){
-            if(memory.get(i).equalsIgnoreCase(id)){
-                memory.set(i, MEMORY_ITEMS);
+
+        if(searchProcess(id)){
+            for(int i = 0; i < memory.size(); i++){
+                if(memory.get(i).equalsIgnoreCase(id)){
+                    memory.set(i, MEMORY_ITEMS);
+                }
             }
+        }else{
+            System.err.println("the process " + id + " is not stored in memory");
         }
+
+
     }
 
     //fit the memory to avoid free spaces between processes
     public void fitMemory(){
-        ArrayList<String> memoryCopy = new ArrayList<>();
-
+        //fill the copy with the processes to save the processes
         for(int i = 0; i < memory.size(); i++){
             if(!(memory.get(i).equalsIgnoreCase(MEMORY_ITEMS))){
                 memoryCopy.add(memory.get(i));
-                memory.remove(i);
-                memory.add(MEMORY_ITEMS);
             }
         }
 
+        //"clean" main memory
+        memory.clear();
+        startMemory();
+
+        //store processes saved in memory
         for(int i = 0; i < memoryCopy.size(); i++){
             memory.remove(i);
             memory.add(memoryCopy.get(i));
+        }
+
+        memoryCopy.clear();
+
+    }
+
+    //only to test. used to verify when necessary
+    public void printCopy(){
+        for(int i = 0; i < memoryCopy.size(); i++){
+            System.out.print(memoryCopy.get(i) + " ");
         }
     }
 
