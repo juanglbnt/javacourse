@@ -1,22 +1,18 @@
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
-public class Memory2 {
-
+public class Test {
     ArrayList<String> memory = new ArrayList<>();
-    ArrayList<String> memoryCopy = new ArrayList<>();
-    String[][] matrixMemory = new String[20][10];
+    List<String> memoryCopy = new ArrayList<>();
+    static Scanner in = new Scanner(System.in);
+    final String MEMORY_ITEMS = "****";
+    String matrixMemory[][] = new String[5][4];
     Random random = new Random();
-    public final String MEMORY_ITEMS = "****";
+    ArrayList<String> memory2 = new ArrayList<>(20);
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        Memory2 obj2 = new Memory2();
+
         String opc = "";
-        String processToCreate;
+        Test obj2 = new Test();
 
         obj2.startMemory();
 
@@ -37,7 +33,7 @@ public class Memory2 {
             }else if(opc.charAt(0) == 'd'){
                 idToDelete = opc.substring(1);
                 obj2.deleteProcess(idToDelete);
-
+                //obj2.fillMatrixMemory();
             }
             else{
                 continue;
@@ -45,36 +41,29 @@ public class Memory2 {
 
 
         }while(!(opc.equalsIgnoreCase("0")));
-
     }
 
     public void startMemory(){
-        for(int i = 0; i < 200; i++){
+        for(int i = 0; i < 20; i++){
             memory.add(MEMORY_ITEMS);
         }
     }
 
-    //only used to verify the original main memory
-    public void showArray(){
-        for(int i = 0; i < memory.size(); i++){
-            System.out.print(memory.get(i) + " ");
-        }
-    }
-
-
     public void fillMatrixMemory(){
         int counter = 0;
-        for(int row = 0; row < 20; row++){
-            for(int col = 0; col < 10; col++){
+        for(int row = 0; row < 5; row++){
+            for(int col = 0; col < 4; col++){
                 matrixMemory[row][col] = memory.get(counter);
                 counter++;
             }
         }
     }
 
+    //**************************************************
+
     public void printMemory(){
-        for(int row = 0; row < 20; row++){
-            for(int col = 0; col < 10; col++){
+        for(int row = 0; row < 5; row++){
+            for(int col = 0; col < 4; col++){
                 System.out.print(matrixMemory[row][col] + "  ");
             }
             System.out.println();
@@ -100,7 +89,7 @@ public class Memory2 {
 
         memorySpace = memoryCurrentSpace();
 
-        size = 5 + random.nextInt(16 - 5);
+        size = 2 + random.nextInt(5 - 2);
 
         idProcess = "s00" + id;
 
@@ -124,9 +113,11 @@ public class Memory2 {
                 memory.remove(i);
                 memory.add(idProcess);
             }
-            System.out.println("the new process with id: " + idProcess + " and size: " + size +
-                    " was store to memory");
         }
+
+        System.out.println("the new process with id: " + idProcess + " and size: " + size +
+                " was store to memory");
+
     }
 
     //Application process
@@ -135,7 +126,7 @@ public class Memory2 {
         int id = 0;
         String idProcess = "";
         List<String> listProcess = new ArrayList<>();
-        size = 5 + random.nextInt(16 - 5);
+        size = 2 + random.nextInt(5 - 2);
         int memorySpace;
 
         memorySpace = memoryCurrentSpace();
@@ -155,7 +146,6 @@ public class Memory2 {
             listProcess.add(idProcess);
         }
 
-
         if(size > memorySpace){
             System.err.println("memory over flow\nmemory space: " + memorySpace);
         }else{
@@ -166,9 +156,12 @@ public class Memory2 {
                 }
 
             }
-            System.out.println("the new process with id: " + idProcess + " and size: " + size +
-                    " was store to memory");
+
+            System.out.println("THISSSS:" + memory.get(19));
         }
+
+        System.out.println("the new process with id: " + idProcess + " and size: " + size +
+                " was store to memory");
     }
 
     //delete a process stored in memory
@@ -180,15 +173,14 @@ public class Memory2 {
                     memory.set(i, MEMORY_ITEMS);
                 }
             }
-            System.out.println("PROCESS DELETED");
             fitMemory();
         }else{
             System.err.println("the process " + id + " is not stored in memory");
         }
-
+        System.out.println("\nPROCESS DELETED");
         fillMatrixMemory();
         printMemory();
-
+        //until here is correct
     }
 
     //fit the memory to avoid free spaces between processes
@@ -198,7 +190,7 @@ public class Memory2 {
             if(!(memory.get(i).equalsIgnoreCase(MEMORY_ITEMS))){
                 memoryCopy.add(memory.get(i));
             }
-        }
+        }//until here is perfect
 
         //"clean" main memory
         for(int i =0; i < memory.size(); i++){
@@ -207,17 +199,41 @@ public class Memory2 {
             }
         }
         fillMatrixMemory();
+        //System.out.println("\nmemoria reiniciada\n");
+        //printMemory();
+        //CORRECT UNTIL HERE
 
+        System.out.println("COPY OF THE MEMORY: \n");
+        printCopy();
+        System.out.println();
+        //CORRECT UNTIL HERE
         //store processes saved in memory
-        int memIndex = 199;
+        //*********************************
+        int memIndex = 19;
         for(int i = memoryCopy.size()-1; i >= 0; i--){
             memory.set(memIndex, memoryCopy.get(i));
             memIndex--;
         }
+        //*********************************
+      //  for(int i = 0; i < memoryCopy.size(); i++){
+        //    memory.remove(i);
+        //}//HERE IS THE ERROR
+        //memory.addAll(memoryCopy);
 
+        System.out.println("\nMEMORY NOW ORGANIZED\n");
         fillMatrixMemory();
+        printMemory();
         memoryCopy.clear();
+    }
 
+    public void watchProcesses(){
+        int processes = 0;
+        for(int i = 0; i < memory.size(); i++){
+            if(!(memory.get(i).equalsIgnoreCase(MEMORY_ITEMS))){
+                processes++;
+            }
+        }
+        System.out.println("\n**processes**" + processes + "\n");
     }
 
     //only to test. used to verify when necessary
