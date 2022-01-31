@@ -1,6 +1,6 @@
 package director;
 
-import builders.HouseBuilder;
+import com.juan.designPatterns.BuilderPatternHouseExample.builders.HouseBuilder;
 import com.juan.designPatterns.BuilderPatternHouseExample.product.House;
 
 public class ConstructionEngineer {

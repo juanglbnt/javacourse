@@ -1,8 +1,8 @@
 package com.juan.designPatterns.BuilderPatternHouseExample;
 
-import builders.ConcreteHouseBuilder;
-import builders.HouseBuilder;
-import builders.PrefabricatedHouse;
+import com.juan.designPatterns.BuilderPatternHouseExample.builders.ConcreteHouseBuilder;
+import com.juan.designPatterns.BuilderPatternHouseExample.builders.HouseBuilder;
+import com.juan.designPatterns.BuilderPatternHouseExample.builders.PrefabricatedHouse;
 import com.juan.designPatterns.BuilderPatternHouseExample.product.House;
 import director.ConstructionEngineer;
 import org.junit.Test;

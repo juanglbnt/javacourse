@@ -1,4 +1,4 @@
-package builders;
+package com.juan.designPatterns.BuilderPatternHouseExample.builders;
 
 import com.juan.designPatterns.BuilderPatternHouseExample.product.House;
 
