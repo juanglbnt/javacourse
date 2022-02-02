@@ -1,0 +1,24 @@
+package com.juan.designPatterns.Observer.observer;
+
+import java.math.BigDecimal;
+
+public class Bidder implements Observer{
+    String bidderName;
+
+    public Bidder(String bidderName){
+        this.bidderName = bidderName;
+    }
+
+    @Override
+    public void update(Observer observer, String productName, BigDecimal bidAmount) {
+        System.out.println("hello " + bidderName + " new bid of amount !!!" + bidAmount
+        + " has been placed on " + productName + " by " + observer);
+    }
+
+    @Override
+    public String toString() {
+        return "Bidder{" +
+                "bidderName='" + bidderName + '\'' +
+                '}';
+    }
+}
