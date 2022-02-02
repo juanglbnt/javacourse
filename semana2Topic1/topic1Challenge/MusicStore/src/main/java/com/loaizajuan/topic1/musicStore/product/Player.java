@@ -19,7 +19,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Payer{" +
+        return "Player{" +
                 "storage=" + storage +
                 ", batteryRate=" + batteryRate +
                 ", color='" + color + '\'' +

@@ -12,35 +12,58 @@ public class Main{
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int storage;
-        int battery = 0;
-        String color = "";
+        int battery;
+        String color;
         int opt;
+        boolean strgValid = false;
+        boolean bryValid = false;
+        boolean colorValid = false;
         PlayerBuilder basePlayer = new BasePlayer();
         PlayerConstructor playerConstructor = new PlayerConstructor(basePlayer);
 
-        System.out.println("CUSTOMIZE YOUR PLAYER\n");
-        System.out.print("seleccione la capacidad de almacenamiento [8gb - 16gb]: ");
-        storage = in.nextInt();
-        if(storage != 8 && storage != 16){
-            System.out.println("no disponible");
-        }else {
-            playerConstructor.setStorage(storage);
-            System.out.print("seleccione la duracion de la bateria [5hrs - 8hrs]: ");
-            battery = in.nextInt();
-            if(battery != 5 && battery != 8){
-                System.out.println("no disponible");
+        System.out.println("ELIGE TU REPRODUCTOR\n");
+
+        do {
+            System.out.print("seleccione la capacidad de almacenamiento [8gb - 16gb]: ");
+            storage = in.nextInt();
+
+            if(storage != 8 && storage != 16){
+                System.out.println("seleccione un valor correcto [8 - 16]");
             }else{
-                playerConstructor.setBattery(battery);
-                System.out.print("seleccione el color [verde - azul]: ");
-                color = in.next();
-                if((!color.equalsIgnoreCase("azul")) && (!color.equalsIgnoreCase("verde"))){
-                    System.out.println("no disponible");
-                }else{
-                    playerConstructor.setColor(color);
-                    Player thePlayer = playerConstructor.makePlayer();
-                    System.out.println("the player is: " + thePlayer);
-                }
+                strgValid = true;
+                playerConstructor.setStorage(storage);
             }
-        }
+
+        }while (!strgValid);
+
+        do {
+            System.out.print("seleccione la capacidad de bateria deseada [5hrs - 8hrs]: ");
+            battery = in.nextInt();
+
+            if(battery != 8 && battery != 5){
+                System.out.println("por favor seleccione una opcion correcta [5 - 8]");
+            }else {
+                bryValid = true;
+                playerConstructor.setBattery(battery);
+            }
+
+        }while (!bryValid);
+
+        do {
+            System.out.print("seleccione el color que desea [azul - verde]: ");
+            color = in.next();
+
+            if((!color.equalsIgnoreCase("azul")) && (!color.equalsIgnoreCase("verde"))){
+                System.out.println("por favor elija un color correcto [azul - verde]");
+            }else{
+                colorValid = true;
+                playerConstructor.setColor(color);
+            }
+
+        }while (!colorValid);
+
+        Player thePlayer = playerConstructor.makePlayer();
+        System.out.println("you new player: " + thePlayer);
+
     }
 }
