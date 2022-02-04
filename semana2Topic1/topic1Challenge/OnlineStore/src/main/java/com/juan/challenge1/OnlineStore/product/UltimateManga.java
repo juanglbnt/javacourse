@@ -2,29 +2,23 @@ package com.juan.challenge1.OnlineStore.product;
 
 import java.util.ArrayList;
 
-public class AmazingVideo implements Subject{
+public class UltimateManga implements Subject{
     private ArrayList<Observer> users = new ArrayList<>();
-    private static final String DESCRIPTION = "PELICULAS Y SERIES SUSCRIPCION MENSUAL";
-    private double price = 290.5;
+    private static final String DESCRIPTION = "MANGAS ILIMITADOS MENSUAL";
+    private double price = 170;
     private Observer user;
 
-    public AmazingVideo(double price){
+    public UltimateManga(double price) {
         this.price = price;
     }
 
-    public AmazingVideo(){
+    public UltimateManga(){
 
     }
 
     @Override
     public double getPrice() {
         return price;
-    }
-
-    @Override
-    public void setPrice(double price) {
-        this.price = price;
-        notifyUsers();
     }
 
     @Override
@@ -38,8 +32,14 @@ public class AmazingVideo implements Subject{
     }
 
     @Override
+    public void setPrice(double price) {
+        this.price = price;
+        notifyUsers();
+    }
+
+    @Override
     public void notifyUsers() {
-        System.out.println("hemos actualizado el precio");
+        System.out.println("hemos cambiado los precios");
         for(Observer ob : users){
             ob.update(DESCRIPTION, price);
         }
