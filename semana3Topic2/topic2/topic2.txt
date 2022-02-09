@@ -1,0 +1,3 @@
+la situación a futuro se contempla usando el patron de diseño factory method
+por medio de la interfaz Printer podremos agregar otras clases de impresoras 
+más adelante
