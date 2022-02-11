@@ -13,6 +13,9 @@ public class CollectionApp {
         collectionApp.usingRemoveIf();
         System.out.println("after removing element 2");
         collectionApp.forEach();
+        collectionApp.usingSort();
+        System.out.println("after sort");
+        collectionApp.forEach();
     }
 
     public void forEach() {
@@ -33,15 +36,15 @@ public class CollectionApp {
     }
 
     public void usingSort(){
-
+        lista.sort((elem1, elem2) -> elem1.compareToIgnoreCase(elem2));
     }
 
     public void loadInList() {
         lista = new ArrayList<>();
-        lista.add("element 1");
+        lista.add("element 4");
         lista.add("element 2");
         lista.add("element 3");
-        lista.add("element 4");
+        lista.add("element 1");
         lista.add("element 5");
     }
 }
