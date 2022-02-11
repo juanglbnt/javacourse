@@ -13,6 +13,9 @@ public class Reference {
         //instanciar un metodo particular
         Operation operation2 = reference::referenciateAnConcreteObject;
         operation2.salute();
+
+        //
+        reference.referenceToAConstructor();
     }
 
     public static void referenceStaticMethod(){
@@ -22,7 +25,8 @@ public class Reference {
     public void operate(){
         /*Operation operation = () -> Reference.referenceStaticMethod();
         operation.salute();*/
-        //referencia a metodo
+        /*referencia a metodo, le estamos enviando un metodo como parametro
+        para el metodo de la interfaz*/
         Operation operation1 = Reference::referenceStaticMethod;
         operation1.salute();
     }
@@ -55,4 +59,26 @@ public class Reference {
         System.out.println("referenciate THIS METHOD that isn't static");
     }
 
+    public void referenceToAConstructor(){
+        InterfacePerson iperson = new InterfacePerson() {
+            @Override
+            public Person create(int id, String name) {
+                return new Person(id, name);
+            }
+        };
+        Person person1 = iperson.create(1, "ana maria");
+        System.out.println("person 1: " + person1.getId() + " " + person1.getName());
+
+        //como metodo lambda
+        InterfacePerson iperson2 = (id, name) -> new Person(id, name);
+        Person person2 = iperson2.create(2, "juan");
+        System.out.println("person 2: (lambda)" + person2.getId() + " " + person2.getName());
+
+        //como referencia a metodo de interface funcional
+        InterfacePerson interfacePerson = Person::new;
+        Person person3 = interfacePerson.create(3, "cmaille");
+        System.out.println("person 3 (reference to a functional interface method)\n" +
+                person3.getId() + " " + person3.getName());
+
+    }
 }
