@@ -21,7 +21,7 @@ public class LambdaApp {
         System.out.println(operation.computateAverage(3, 4));*/
 
         //usando lambda
-        Operation operation = (double number1, double number2) -> (number1 + number2) / 2;
+        Operation operation = (number1, number2) -> (number1 + number2) / 2;
         System.out.println(operation.computateAverage(3, 4));
     }
 
