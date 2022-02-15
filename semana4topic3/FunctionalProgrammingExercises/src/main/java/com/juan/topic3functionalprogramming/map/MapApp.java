@@ -32,8 +32,8 @@ public class MapApp {
     }
 
     public void printMap(){
-        //map.forEach((key, value) -> System.out.println("key: " + key + " value: " + value));
-        map.entrySet().stream().forEach(System.out::println);
+        map.forEach((k, v) -> System.out.println("key: " + k + " value: " + v));
+        //map.entrySet().stream().forEach(System.out::println);
     }
 
     public void putIfAbsent(){
