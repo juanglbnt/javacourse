@@ -1,5 +1,6 @@
 package com.juan.Exercises;
 
+import com.juan.Exercises.model.Customer;
 import com.juan.Exercises.model.Order;
 import com.juan.Exercises.model.Product;
 import com.juan.Exercises.repos.CustomerRepo;
@@ -16,10 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.DoubleSummaryStatistics;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -159,6 +158,79 @@ class ExercisesApplicationTests {
 
 		System.out.println(String.format("count = %1$d, average = %2$f, max = %3$f, min = %4$f, sum = %5$f,",
 		statistics.getCount(), statistics.getAverage(), statistics.getMax(), statistics.getMin(), statistics.getSum()));
+	}
+
+	@Test
+	@DisplayName("exercise 11, a map with order id and order's product count")
+	public void exercise11(){
+		Map<Long, Integer> result = orderRepo.findAll()
+				.stream()
+				.collect(Collectors.toMap(
+						order -> order.getId(),
+						order -> order.getProducts().size()
+						)
+				);
+
+		System.out.println(result);
+	}
+
+	@Test
+	@DisplayName("exercise 12, a map with order records grouped by customer")
+	public void exercise12(){
+		Map<Customer, List<Order>> result = orderRepo.findAll()
+				.stream()
+				.collect(
+						Collectors.groupingBy(Order::getCustomer)
+				);
+
+		System.out.println(result);
+	}
+
+	@Test
+	@DisplayName("exercise 13, data map with order record and product totalsum")
+	public void exercise13(){
+		Map<Order, Double> result = orderRepo.findAll()
+				.stream()
+				.collect(
+						Collectors.toMap(
+								Function.identity(),
+								order -> order.getProducts().stream()
+										.mapToDouble(p -> p.getPrice()).sum()
+						)
+				);
+
+		for (Order key: result.keySet()){
+			System.out.println(key + " = " + result.get(key));
+		}
+	}
+
+	@Test
+	@DisplayName("exercise 14, a data map with list of product name by category")
+	public void exercise14(){
+		Map<String, List<String>> result = productRepo.findAll()
+				.stream()
+				.collect(
+						Collectors.groupingBy(
+								Product::getCategory,
+								Collectors.mapping(product -> product.getName(), Collectors.toList())
+						)
+				);
+
+		System.out.println(result);
+	}
+
+	@Test
+	public void Exercise15(){
+		Map<String, Optional<Product>> result = productRepo.findAll()
+				.stream()
+				.collect(
+						Collectors.groupingBy(
+								Product::getCategory,
+								Collectors.maxBy(Comparator.comparing(Product::getPrice))
+						)
+				);
+
+		System.out.println(result);
 	}
 
 }
