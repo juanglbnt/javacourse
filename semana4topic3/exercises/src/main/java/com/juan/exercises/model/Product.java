@@ -1,14 +1,15 @@
 package com.juan.Exercises.model;
 
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
 public class Product {

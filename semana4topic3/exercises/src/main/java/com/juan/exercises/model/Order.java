@@ -20,8 +20,10 @@ public class Order {
 
     @Column(name = "order_date")
     private LocalDate orderDate;
+
     @Column(name = "delivery_date")
     private LocalDate deliveryDate;
+
     private String status;
 
     @ManyToOne

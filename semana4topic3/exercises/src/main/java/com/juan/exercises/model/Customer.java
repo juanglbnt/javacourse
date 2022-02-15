@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Table
-@Data
 @Builder
+@Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table
 public class Customer {
 
     @Id
