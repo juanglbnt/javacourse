@@ -15,12 +15,34 @@ public class PlayerFactory extends BasePlayerFactory{
     @Override
     public void getData(){
 
-        System.out.print("select the storage [8gb - 16]: ");
-        storageIn = in.nextInt();
-        System.out.print("select the battery [5hrs - 8hrs]: ");
-        batteryIn = in.nextInt();
-        System.out.print("select the color [blue - green]: ");
-        colorIn = in.next();
+        System.out.println("customize your new music player");
+
+        do {
+            System.out.print("select the storage [8gb - 16]: ");
+            storageIn = in.nextInt();
+
+            if(!isValidStorage(storageIn))
+                System.out.println("try again, select a valid option");
+
+        }while(!isValidStorage(storageIn));
+
+        do {
+            System.out.print("select the battery [5hrs - 8hrs]: ");
+            batteryIn = in.nextInt();
+
+            if(!isValidBattery(batteryIn))
+                System.out.println("try again, select a valid option");
+
+        }while(!isValidBattery(batteryIn));
+
+        do {
+            System.out.print("select the color [blue - green]: ");
+            colorIn = in.next();
+
+            if(!isValidColor(colorIn))
+                System.out.println("try again, select a valid option");
+
+        }while(!isValidColor(colorIn));
 
         makePlayer(storageIn, batteryIn, colorIn);
     }
@@ -38,5 +60,30 @@ public class PlayerFactory extends BasePlayerFactory{
         abstractPlayer = new Player(setUpFactory);
         abstractPlayer.createPlayer();
         return abstractPlayer;
+    }
+
+    public boolean isValidBattery(int value) {
+        if((value == 5) || (value == 8)) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean isValidStorage(int value) {
+        if((value == 8) || (value == 16)) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean isValidColor(String value) {
+        if((value.equalsIgnoreCase("blue")) ||
+                (value.equalsIgnoreCase("green"))) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }
