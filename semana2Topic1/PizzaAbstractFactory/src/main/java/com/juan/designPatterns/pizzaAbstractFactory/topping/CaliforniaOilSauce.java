@@ -2,7 +2,7 @@ package com.juan.designPatterns.pizzaAbstractFactory.topping;
 
 public class CaliforniaOilSauce implements Sauce{
 
-    public CaliforniaOilSauce(){
+    public CaliforniaOilSauce() {
         preparingSauce();
     }
 
