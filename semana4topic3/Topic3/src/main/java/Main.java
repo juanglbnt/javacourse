@@ -10,9 +10,7 @@ public class Main {
         Exercise2 ex2 = new Exercise2();
         Exercise1 ex1 = new Exercise1();
 
-        Double result = ex1.expansionImperative(20.00);
-        System.out.printf("%.4f", result);
-        System.out.println("\nfactorial: " + ex1.factorial(3));
+        ex1.getTheExpansion();
 
     }
 }
