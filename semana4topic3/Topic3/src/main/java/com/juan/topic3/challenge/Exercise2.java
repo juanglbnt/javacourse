@@ -1,8 +1,6 @@
 package com.juan.topic3.challenge;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Exercise2 {
@@ -18,7 +16,9 @@ public class Exercise2 {
         int testCasesNumber;
         int numberOfPasswords;
         String password;
+        String loginAttempt;
         List<String> passwordList = new ArrayList<>();
+        Map<String, List<String>> passwordMap = new HashMap<>();
 
         do {
             System.out.print("Enter the number of cases\n" +
@@ -35,14 +35,36 @@ public class Exercise2 {
                 numberOfPasswords = scan.nextInt();
             }while (!validNumberOfPasswords.test(numberOfPasswords));
 
-            System.out.println("Enter the passwords separated by enter");
             for(int j = 0; j < numberOfPasswords; j++) {
                 password = scan.next();
                 passwordList.add(password);
             }
 
+            System.out.print("");
+            loginAttempt = scan.next();
+            passwordMap.put(loginAttempt, passwordList);
+            passwordList.clear();
         }
+        printMap(passwordMap);
 
+    }
+
+    public void printMap(Map<String, List<String>> map) {
+        Iterator it = map.keySet().iterator();
+
+        while(it.hasNext()) {
+            String key = it.next().toString();
+            System.out.println("attempt: " + key + " passwords " + map.get(key));
+        }
+    }
+
+    public String verLista(List<String> list) {
+        String lista = "";
+
+        for (String element : list) {
+            lista += element + " ";
+        }
+        return lista;
     }
 
 }
