@@ -39,6 +39,10 @@ public class Book {
         this.year = year;
     }
 
+    public Book() {
+
+    }
+
     public Book(int bookID, String bookName, String bookAuthor, int bookYear) {
         setId(bookID);
         setName(bookName);

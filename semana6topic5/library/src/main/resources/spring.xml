@@ -10,6 +10,8 @@
     <context:component-scan base-package="com.juan.library"/>
 
     <bean id="bookDao" class="com.juan.library.dao.BookDao" />
+    <bean id="menu" class="com.juan.library.view.MainMenu" />
+    <bean id="view" class="com.juan.library.view.BookView" />
 
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
