@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.List;
 
 @Component
 public class JdbcDaoImpl {
@@ -61,7 +62,22 @@ public class JdbcDaoImpl {
 
     public Circle getCircleForId(int circleId) {
         String sql = "select * from circle where id = ?";
-        jdbcTemplate.queryForObject(sql, new Object[] {circleId}, );
+        return jdbcTemplate.queryForObject(sql, new Object[] {circleId}, new CircleRowMapper());
+    }
+
+    public List<Circle> getAllCircles() {
+        String sql = "select * from circle";
+        return jdbcTemplate.query(sql, new CircleRowMapper());
+    }
+
+    public void insertCircle(Circle circle) {
+        String sql = "insert into circle (id, name) values (?, ?)";
+        jdbcTemplate.update(sql, new Object[] {circle.getId(), circle.getName()});
+    }
+
+    public void createTriangleTable() {
+        String sql = "create table triangle (id integer, name varchar(50))";
+        jdbcTemplate.execute(sql);
     }
 
     //getters and setters
