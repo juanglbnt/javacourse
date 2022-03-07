@@ -1,18 +1,36 @@
-package com.juan.jdbcdemo.DAO;
+package com.juan.jdbcdemo.dao;
 
 import com.juan.jdbcdemo.model.Circle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
+@Component
 public class JdbcDaoImpl {
+
+    @Autowired
+    private DataSource dataSource;
+
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public Circle getCircle(int circleId) {
 
+
+
         Connection connection = null;
         try {
-            String driver = "org.apache.derby.jdbc.ClientDriver";
-            Class.forName(driver).getDeclaredConstructor().newInstance();
-            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/db");
+            //este apartado queda cubierto en el spring.xml
+            /*String driver = "org.apache.derby.jdbc.ClientDriver";
+            Class.forName(driver).getDeclaredConstructor().newInstance();*/
+            connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement("select * from circle where id = ?");
             ps.setInt(1, circleId);
 
