@@ -7,11 +7,13 @@ public class JdbcDemo {
 
     public static void main(String[] args) {
 
-        //posible error aqui
         ApplicationContext appContext = new ClassPathXmlApplicationContext("spring.xml");
         JdbcDaoImpl dao = appContext.getBean("jdbcDaoImpl", JdbcDaoImpl.class);
         Circle circle = dao.getCircle(1);
         System.out.println(circle.getName());
+
+        System.out.println(dao.getCircleCount());
+        System.out.println(dao.getCircleName(1));
 
     }
 }
