@@ -1,0 +1,10 @@
+insert into director values(1, "Ethan coen");
+insert into director values(2, "joel coen");
+insert into director values(3, "stanley kubrick");
+insert into director values(4, "francis ford coppola");
+insert into film values(201, "no contry for old men", 2007, 1);
+insert into film values(202, "big lebowski", 1998, 2);
+insert into film values(203, "full metal jacket", 1987, 3);
+insert into film values(204, "a clockwork orange", 1971, 3);
+insert into film values(205, "the godfather", 1972, 4);
+insert into film values(206, "apocalypse now", 1979, 4);
