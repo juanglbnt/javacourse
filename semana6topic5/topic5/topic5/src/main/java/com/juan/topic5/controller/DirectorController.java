@@ -39,7 +39,7 @@ public class DirectorController {
     }
 
     @PutMapping("/update")
-    public Director updateDirector(@PathVariable Director director) {
+    public Director updateDirector(@RequestBody Director director) {
         return directorService.updateDirector(director);
     }
 

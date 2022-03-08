@@ -14,7 +14,6 @@ public class FilmController {
     @Autowired
     FilmService filmService;
 
-    //aqui hay error, con el tema de la llave foranea
     @PostMapping("/addFilm")
     public Film addFilm(@RequestBody Film film) {
         return filmService.saveFilm(film);
@@ -35,15 +34,14 @@ public class FilmController {
         return filmService.getFilmByName(name);
     }
 
-    /*
-
-    @PutMapping("/update")
-    public Director updateDirector(@PathVariable Director director) {
-        return directorService.updateDirector(director);
+    @PutMapping("/updateFilm")
+    public Film updateFilm(@RequestBody Film film) {
+        return filmService.updateFilm(film);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteDirector(@PathVariable int id) {
-        return directorService.deleteDirector(id);
-    }*/
+    @DeleteMapping("/deleteFilm/{id}")
+    public String deleteFilm(@PathVariable int id) {
+        return filmService.deleteFilm(id);
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.juan.topic5.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,11 +12,11 @@ public class Film {
     private int id;
     private String name;
     private int year;
-    private int director_id;
 
-    /*@ManyToOne
-    @JoinColumn(name = "director_id", nullable = false)
-    private Director director;*/
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "director_id")
+    private Director director;
 
     public int getId() {
         return id;
@@ -40,11 +42,11 @@ public class Film {
         this.year = year;
     }
 
-    public int getDirector_id() {
-        return director_id;
+    public Director getDirector() {
+        return director;
     }
 
-    public void setDirector_id(int director_id) {
-        this.director_id = director_id;
+    public void setDirector(Director director) {
+        this.director = director;
     }
 }

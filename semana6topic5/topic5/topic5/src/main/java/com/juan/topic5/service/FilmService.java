@@ -42,7 +42,7 @@ public class FilmService {
         Film theFilm = filmRepository.findById(film.getId()).orElse(null);
         theFilm.setName(film.getName());
         theFilm.setYear(film.getYear());
-        theFilm.setDirector_id(film.getDirector_id());
+        theFilm.setDirector(film.getDirector());
 
         return filmRepository.save(theFilm);
     }
