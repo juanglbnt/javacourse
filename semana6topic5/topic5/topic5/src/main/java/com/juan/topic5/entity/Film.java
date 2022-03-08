@@ -12,9 +12,9 @@ public class Film {
     private int year;
     private int director_id;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "director_id", nullable = false)
-    private Director director;
+    private Director director;*/
 
     public int getId() {
         return id;

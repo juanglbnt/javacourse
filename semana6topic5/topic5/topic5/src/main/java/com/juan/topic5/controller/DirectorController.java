@@ -28,12 +28,12 @@ public class DirectorController {
         return directorService.getDirectors();
     }
 
-    @GetMapping("/director/{id}")
+    @GetMapping("/directorById/{id}")
     public Director findDirectorById(@PathVariable int id) {
         return directorService.getDirectorById(id);
     }
 
-    @GetMapping("/director/{name}")
+    @GetMapping("/directorByName/{name}")
     public Director findDirectorByName(@PathVariable String name) {
         return directorService.getDirectorByName(name);
     }
