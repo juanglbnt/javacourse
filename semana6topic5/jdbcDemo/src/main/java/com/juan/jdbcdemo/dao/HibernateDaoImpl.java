@@ -12,8 +12,9 @@ public class HibernateDaoImpl {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public int getCircleCount() {
+    /*public int getCircleCount() {
         String sql = "select count(*) from circle";
         Query query = sessionFactory.openSession().createQuery(sql);
-    }
+    }*/
+
 }
