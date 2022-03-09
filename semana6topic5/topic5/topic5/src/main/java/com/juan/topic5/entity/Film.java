@@ -15,8 +15,12 @@ public class Film {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "director_id")
+    @JoinColumn(name = "director_id", referencedColumnName = "id")
     private Director director;
+
+    public Film() {
+
+    }
 
     public int getId() {
         return id;
