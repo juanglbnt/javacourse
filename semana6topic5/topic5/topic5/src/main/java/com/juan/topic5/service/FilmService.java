@@ -1,11 +1,13 @@
 package com.juan.topic5.service;
 
 import com.juan.topic5.entity.Film;
+import com.juan.topic5.repository.DirectorRepository;
 import com.juan.topic5.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilmService {

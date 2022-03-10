@@ -14,7 +14,7 @@ public class Film {
     private int year;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "director_id", referencedColumnName = "id")
     private Director director;
 

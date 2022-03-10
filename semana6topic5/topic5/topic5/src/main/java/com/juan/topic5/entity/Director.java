@@ -1,9 +1,7 @@
 package com.juan.topic5.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "director")
@@ -13,8 +11,7 @@ public class Director {
     private int id;
     private String name;
 
-    @OneToMany(targetEntity = Film.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "director_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "director")
     private List<Film> films;
 
     public int getId() {
@@ -31,5 +28,13 @@ public class Director {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<Film> films) {
+        this.films = films;
     }
 }
