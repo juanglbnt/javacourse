@@ -7,28 +7,18 @@ import javax.persistence.*;
 public class State {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String name;
+    int id;
 
     @ManyToOne
-    @JoinColumn(name = "id_country")
-    private Country country;
+    @JoinColumn(name = "country_id")
+    Country country;
 
-    public State() {
+    String name;
 
-    }
+    public State() {}
 
-    public State(String name, Country country) {
-        this.name = name;
+    public State(Country country, String name) {
         this.country = country;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -38,5 +28,13 @@ public class State {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

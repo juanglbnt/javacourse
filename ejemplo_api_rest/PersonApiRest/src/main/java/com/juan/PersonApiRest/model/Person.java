@@ -22,7 +22,7 @@ public class Person {
     private State state;
 
     public Person() {
-        
+
     }
 
     public Person(String name, String surname, String age, Country country, State state) {
