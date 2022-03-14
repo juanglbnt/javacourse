@@ -1,10 +1,14 @@
 package com.juan.PersonApiRest.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
+@Data
 @Table(name = "state")
-public class State {
+public class State implements Serializable {
 
     @Id
     Long id;
@@ -14,35 +18,4 @@ public class State {
     Country country;
 
     String name;
-
-    public State() {}
-
-    public State(Country country, String name) {
-        this.country = country;
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
