@@ -3,3 +3,8 @@
     padding-right: 20%;
     margin-top: 10%;
 }
+
+.table{
+    width: 100%;
+    border: 1px solid #000;
+}
