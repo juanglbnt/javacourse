@@ -32,4 +32,10 @@ public class PersonRest {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
+    @DeleteMapping(value = "delete/{id}")
+    private ResponseEntity<Boolean> deletePerson(@PathVariable ("id") Long id) {
+        personService.deleteById(id);
+        return ResponseEntity.ok(!(personService.findById(id) != null));
+    }
 }

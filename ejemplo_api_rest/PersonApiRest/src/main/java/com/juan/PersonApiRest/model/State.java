@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class State {
 
     @Id
-    int id;
+    Long id;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
@@ -20,6 +20,14 @@ public class State {
     public State(Country country, String name) {
         this.country = country;
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Country getCountry() {
