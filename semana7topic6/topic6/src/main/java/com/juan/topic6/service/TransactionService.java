@@ -19,13 +19,17 @@ public class TransactionService {
 
     public Transaction makeTransaction(Transaction transaction) {
         final double EXCEDENTE = 3500.0;
+        final double TAX = 0.03;
+        double totalTax;
+        final double LIMIT = 1500000;
         double amount = transaction.getAmount();
         double funds = transaction.getAccount().getFunds();
         Bank bank = transaction.getDestinationAccount().getBank();
-        double finalAmount = 0.0;
+        double finalAmount;
         double destinationAccountFunds = transaction.getDestinationAccount().getFunds();
 
-        finalAmount = (bank.getId() == 5) ? amount : amount + EXCEDENTE;
+        totalTax = (amount > LIMIT) ? amount * TAX : 0.0;
+        finalAmount = (bank.getId() == 5) ? amount - totalTax: (amount + EXCEDENTE) - totalTax;
         transaction.setAmount(finalAmount);
 
         if(finalAmount > funds) {
