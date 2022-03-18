@@ -21,6 +21,7 @@ public class PaymentService {
         String billId = payment.getBillId();
         String accountType = payment.getAccount().getType();
         double discount = (accountType.equals("CORRIENTE")) ? (amount*0.1) : 0;
+        payment.setAmount(amount - discount);
 
         if (isValidId(billId)) {
             if(!accountIsValidToPayment(amount, funds)) {

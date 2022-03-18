@@ -21,92 +21,51 @@ class TransactionServiceTest {
 
     @Mock
     private TransactionRepository transactionRepository;
-    @Mock
-    private TransactionRest transactionRest;
 
     @InjectMocks
-    private TransactionService transactionService;
-
-    @Autowired
-    private Transaction transaction;
-    @Autowired
-    private Transaction transaction2;
-    private Transaction transaction3;
-    @Autowired
-    private Account account1;
-    @Autowired
-    private Account account2;
-    @Autowired
-    private Bank globantBank;
-    @Autowired
-    private Bank interBank;
-    @Autowired
-    private User user1;
-    @Autowired
-    private User user2;
+    TransactionService transactionService;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
-        interBank = new Bank();
-        interBank.setId(6);
-        interBank.setName("inter Bank");
-        globantBank = new Bank();
-        globantBank.setId(5);
-        globantBank.setName("banco globant");
-
-        user1 = new User();
-        user1.setName("juan");
-        user1.setLastName("zapata");
-        user1.setDocNumber(18282);
-
-        user2 = new User();
-        user2.setName("laura");
-        user2.setLastName("rodriguez");
-        user2.setDocNumber(991881);
-
-        account1 = new Account();
-        account1.setFunds(270000);
-        account1.setType("AHORROS");
-        account1.setBank(globantBank);
-        account1.setUser(user1);
-
-        account2 = new Account();
-        account2.setBank(interBank);
-        account2.setUser(user2);
-        account2.setFunds(50000);
-        account2.setType("CORRIENTE");
-
-        transaction = new Transaction();
-        transaction.setAccount(account1);
-        transaction.setDestinationAccount(account2);
-        transaction.setAmount(100000);
-
-        transaction2 = new Transaction();
-        transaction2.setAccount(account1);
-        transaction2.setDestinationAccount(account2);
-        transaction2.setAmount(300000);
-
-        transaction3 = new Transaction();
-        transaction3.setAccount(account1);
-        transaction3.setDestinationAccount(account2);
-        transaction3.setAmount(10000);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
     public void transactionMustFailNotSufficientFunds() {
-        Mockito.when(transactionRepository.save(Mockito.any(Transaction.class))).thenReturn(transaction2);
+        Bank bank1 = Bank.builder().id(5).name("globant bank").build();
+        Bank bank2 = Bank.builder().id(12).name("universal bank").build();
+
+        User user1 = User.builder().id(123L).name("user1").lastName("user1").docNumber(12345).build();
+        User user2 = User.builder().id(1429L).name("user2").lastName("user2").docNumber(1982).build();
+
+        Account account1 = Account.builder().id(1200L).type("CORRIENTE").funds(750000).user(user1).bank(bank1).build();
+        Account account2 = Account.builder().id(1999L).type("AHORROS").funds(225000).user(user2).bank(bank2).build();
+
+        Transaction transaction = Transaction.builder().id(1L).amount(750000).account(account1).destinationAccount(account2).build();
+
+        Mockito.when(transactionRepository.save(Mockito.any(Transaction.class))).thenReturn(transaction);
         InsufficientFundsException ex = Assertions.assertThrows(InsufficientFundsException.class,
-                () -> transactionService.makeTransaction(transaction2));
+                () -> transactionService.makeTransaction(transaction));
 
         Assertions.assertEquals(transactionService.INSUFFICIENT_FUNDS_MESSAGE, ex.getMessage());
     }
 
     @Test
-    public void accountTypeCaseFail() {
-        Mockito.when(transactionRepository.save(Mockito.any(Transaction.class))).thenReturn(transaction3);
+    public void accountTypeCaseFailAccountHasTripleTheFunds() {
+        Bank bank1 = Bank.builder().id(5).name("globant bank").build();
+        Bank bank2 = Bank.builder().id(12).name("universal bank").build();
+
+        User user1 = User.builder().id(123L).name("user1").lastName("user1").docNumber(12345).build();
+        User user2 = User.builder().id(1429L).name("user2").lastName("user2").docNumber(1982).build();
+
+        Account account1 = Account.builder().id(1200L).type("CORRIENTE").funds(750000).user(user1).bank(bank1).build();
+        Account account2 = Account.builder().id(1999L).type("CORRIENTE").funds(350000).user(user2).bank(bank2).build();
+
+        Transaction transaction = Transaction.builder().id(1L).amount(100000).account(account1).destinationAccount(account2).build();
+
+        Mockito.when(transactionRepository.save(Mockito.any(Transaction.class))).thenReturn(transaction);
         InvalidTargetException ex = Assertions.assertThrows(InvalidTargetException.class,
-                () -> transactionService.makeTransaction(transaction3));
+                () -> transactionService.makeTransaction(transaction));
 
         Assertions.assertEquals(transactionService.INVALID_TARGET_EXCEPTION_MESSAGE, ex.getMessage());
 

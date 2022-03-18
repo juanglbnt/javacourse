@@ -20,7 +20,10 @@ public class Prueba1 {
         Bank bank1 = Bank.builder().id(5).name("globant bank").build();
         User user1 = User.builder().id(123L).name("user1").lastName("user1").docNumber(12345).build();
         Account account1 = Account.builder().id(1200L).type("CORRIENTE").funds(250000).user(user1).bank(bank1).build();
-        Payment payment1 = Payment.builder().id(123).billId("0082734").companyId(1).expirationDate("12-11-10").amount(190000).account(account1).build();
+        Payment payment1 = Payment.builder().id(123).billId("0082734").companyId(1).expirationDate("12-11-10")
+                .amount(190000).account(account1).build();
+
+        System.out.println("funds: " + payment1.getAccount().getFunds());
 
     }
 }

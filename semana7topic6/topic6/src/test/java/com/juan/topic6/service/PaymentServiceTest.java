@@ -36,8 +36,9 @@ class PaymentServiceTest {
     public void notSufficientFundsToPayTheBill() {
         Bank bank1 = Bank.builder().id(5).name("globant bank").build();
         User user1 = User.builder().id(123L).name("user1").lastName("user1").docNumber(12345).build();
-        Account account1 = Account.builder().id(1200L).type("CORRIENTE").funds(100000).user(user1).bank(bank1).build();
-        Payment payment1 = Payment.builder().id(123).billId("0082734").companyId(1).expirationDate("12-11-10").amount(190000).account(account1).build();
+        Account account1 = Account.builder().id(1200L).type("CORRIENTE").funds(100).user(user1).bank(bank1).build();
+        Payment payment1 = Payment.builder().id(123).billId("0082734").companyId(1).expirationDate("12-11-10")
+                .amount(100).account(account1).build();
 
         Mockito.when(paymentRepository.save(Mockito.any(Payment.class))).thenReturn(payment1);
         InsufficientFundsException ex = Assertions.assertThrows(InsufficientFundsException.class,
@@ -50,13 +51,26 @@ class PaymentServiceTest {
     public void invalidBillCase() {
         Bank bank1 = Bank.builder().id(5).name("globant bank").build();
         User user1 = User.builder().id(123L).name("user1").lastName("user1").docNumber(12345).build();
-        Account account1 = Account.builder().id(1200L).type("CORRIENTE").funds(100000).user(user1).bank(bank1).build();
-        Payment payment1 = Payment.builder().id(123).billId("82734").companyId(1).expirationDate("12-11-10").amount(190000).account(account1).build();
+        Account account1 = Account.builder().id(1200L).type("CORRIENTE").funds(500000).user(user1).bank(bank1).build();
+        Payment payment1 = Payment.builder().id(123).billId("82734").companyId(1).expirationDate("12-11-10")
+                .amount(190000).account(account1).build();
 
         Mockito.when(paymentRepository.save(Mockito.any(Payment.class))).thenReturn(payment1);
         InvalidBillIdException ex = Assertions.assertThrows(InvalidBillIdException.class,
                 () -> paymentService.makePayment(payment1));
 
         Assertions.assertEquals(paymentService.INVALID_TARGET_MESSAGE, ex.getMessage());
+    }
+
+    @Test
+    public void makeThePaymentSuccessfully() {
+        Bank bank1 = Bank.builder().id(5).name("globant bank").build();
+        User user1 = User.builder().id(123L).name("user1").lastName("user1").docNumber(12345).build();
+        Account account1 = Account.builder().id(1200L).type("CORRIENTE").funds(500).user(user1).bank(bank1).build();
+        Payment payment1 = Payment.builder().id(123).billId("0082734").companyId(1).expirationDate("12-11-10")
+                .amount(250).account(account1).build();
+
+        Mockito.when(paymentRepository.save(Mockito.any(Payment.class))).thenReturn(payment1);
+        assertNotNull(paymentService.makePayment(payment1));
     }
 }
