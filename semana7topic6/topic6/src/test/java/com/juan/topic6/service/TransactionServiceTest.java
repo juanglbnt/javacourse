@@ -1,13 +1,13 @@
 package com.juan.topic6.service;
 
 import com.juan.topic6.exceptions.InsufficientFundsException;
+import com.juan.topic6.exceptions.InvalidTargetException;
 import com.juan.topic6.model.Account;
 import com.juan.topic6.model.Bank;
 import com.juan.topic6.model.Transaction;
 import com.juan.topic6.model.User;
 import com.juan.topic6.repositories.TransactionRepository;
 import com.juan.topic6.rest.TransactionRest;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +16,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionServiceTest {
 
@@ -33,6 +31,7 @@ class TransactionServiceTest {
     private Transaction transaction;
     @Autowired
     private Transaction transaction2;
+    private Transaction transaction3;
     @Autowired
     private Account account1;
     @Autowired
@@ -87,20 +86,29 @@ class TransactionServiceTest {
         transaction2.setAccount(account1);
         transaction2.setDestinationAccount(account2);
         transaction2.setAmount(300000);
+
+        transaction3 = new Transaction();
+        transaction3.setAccount(account1);
+        transaction3.setDestinationAccount(account2);
+        transaction3.setAmount(10000);
     }
 
     @Test
-    public void transactionSuccess() {
-        Mockito.when(transactionRepository.save(Mockito.any(Transaction.class))).thenReturn(transaction);
-        assertNotNull(transactionService.makeTransaction(new Transaction()));
-    }
-
-    @Test
-    public void transactionMustFail() {
+    public void transactionMustFailNotSufficientFunds() {
         Mockito.when(transactionRepository.save(Mockito.any(Transaction.class))).thenReturn(transaction2);
         InsufficientFundsException ex = Assertions.assertThrows(InsufficientFundsException.class,
                 () -> transactionService.makeTransaction(transaction2));
 
         Assertions.assertEquals(transactionService.INSUFFICIENT_FUNDS_MESSAGE, ex.getMessage());
+    }
+
+    @Test
+    public void accountTypeCaseFail() {
+        Mockito.when(transactionRepository.save(Mockito.any(Transaction.class))).thenReturn(transaction3);
+        InvalidTargetException ex = Assertions.assertThrows(InvalidTargetException.class,
+                () -> transactionService.makeTransaction(transaction3));
+
+        Assertions.assertEquals(transactionService.INVALID_TARGET_EXCEPTION_MESSAGE, ex.getMessage());
+
     }
 }

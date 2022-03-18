@@ -1,7 +1,5 @@
 package com.juan.topic6.rest;
 
-import com.juan.topic6.exceptions.Helper;
-import com.juan.topic6.exceptions.InsufficientFundsException;
 import com.juan.topic6.model.Transaction;
 import com.juan.topic6.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,6 @@ public class TransactionRest {
 
     @Autowired
     TransactionService transactionService;
-
-    Helper helper;
-
     @PostMapping
     public ResponseEntity<Transaction> makeTransaction(@RequestBody Transaction transaction) {
         try {
