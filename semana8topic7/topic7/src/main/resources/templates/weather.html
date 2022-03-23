@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather data</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <h1>HELLO</h1>
+    <div class="container">
+        <h1 th:text="${title}"></h1>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">date</th>
+                <th scope="col">latitude</th>
+                <th scope="col">longitude</th>
+                <th scope="col">city</th>
+                <th scope="col">state</th>
+                <th scope="col">temperature</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="data:${list}">
+                <th scope="row" th:text="${data.id}"></th>
+                <td th:text="${data.date}"></td>
+                <td th:text="${data.lat}"></td>
+                <td th:text="${data.lon}"></td>
+                <td th:text="${data.city}"></td>
+                <td th:text="${data.state}"></td>
+                <td th:text="${data.temperature}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
