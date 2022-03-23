@@ -19,7 +19,7 @@ public class WeatherDataController {
     @GetMapping("/")
     public String listAllData(Model model) {
         List<WeatherData> listOfData = weatherDataService.getAllWeatherData();
-        model.addAttribute("title", "Weather Data");
+        model.addAttribute("title", "Weather Events Data");
         model.addAttribute("list", listOfData);
         return "weather";
     }

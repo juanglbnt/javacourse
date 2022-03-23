@@ -13,7 +13,15 @@ public class WeatherDataService {
     @Autowired
     WeatherDataRepository weatherDataRepository;
 
+    public WeatherData save(WeatherData weatherData) {
+        return weatherDataRepository.save(weatherData);
+    }
+
     public List<WeatherData> getAllWeatherData() {
         return weatherDataRepository.findAll();
+    }
+
+    public void delete(int id) {
+        weatherDataRepository.deleteById(id);
     }
 }
