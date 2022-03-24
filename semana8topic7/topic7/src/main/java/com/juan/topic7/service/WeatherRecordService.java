@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WeatherRecordService {
@@ -17,7 +18,15 @@ public class WeatherRecordService {
         return repository.findAll();
     }
 
+    public WeatherRecord findById(Long id) {
+       return repository.getById(id);
+    }
+
     public WeatherRecord save(WeatherRecord weatherRecord) {
         return repository.save(weatherRecord);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

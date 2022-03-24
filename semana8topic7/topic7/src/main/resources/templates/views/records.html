@@ -20,6 +20,8 @@
                 <th scope="col">City</th>
                 <th scope="col">State</th>
                 <th scope="col">Temperature</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -31,6 +33,16 @@
                 <td th:text="${record.city}"></td>
                 <td th:text="${record.state}"></td>
                 <td th:text="${record.temperature}"></td>
+
+                <td>
+                    <a class="btn btn-success btn-sm" th:href="@{/views/edit/} + ${record.id}"
+                    th:text="'Update'"></a>
+                </td>
+
+                <td>
+                    <a class="btn btn-danger btn-sm" th:href="@{/views/delete/} + ${record.id}"
+                       th:text="'Delete'"></a>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -6,10 +6,7 @@ import com.juan.topic7.service.WeatherRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,4 +39,20 @@ public class WeatherRecordController {
         service.save(weatherRecord);
         return "redirect:/views/";
     }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        WeatherRecord weatherRecord1 = service.findById(id);
+        model.addAttribute("title", "edit a client");
+        model.addAttribute("event", weatherRecord1);
+        return "/views/create";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        service.delete(id);
+        System.out.println("deleted successfully");
+        return "redirect:/views/";
+    }
+
 }

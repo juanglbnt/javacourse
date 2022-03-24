@@ -1,2 +1,2 @@
-insert into records (id, date, lat, lon, city, state, temperature) values (1, '2019-12-11', 8191, 7265, 'cali', 'valle del cauca', 23.8999);
-insert into records (id, date, lat, lon, city, state, temperature) values (2, '2020-10-24', 1287, 1092, 'ixmiquilpan', 'hidalgo', 38.7221);
+insert into records (date, lat, lon, city, state, temperature) values ('2019-12-11', 8191, 7265, 'cali', 'valle del cauca', 23.8999);
+insert into records (date, lat, lon, city, state, temperature) values ('2020-10-24', 1287, 1092, 'ixmiquilpan', 'hidalgo', 38.7221);
