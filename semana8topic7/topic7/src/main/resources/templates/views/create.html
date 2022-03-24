@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+    <div class="container">
+        <p align="center">FORM TO CREATE A NEW EVENT</p>
+        <a class="btn btn-primary btn-sm" th:href="@{/views/}" th:text="'Events'"></a>
+
+        <div class="card bg-light">
+            <div class="card-header bg-dark text-white" th:text="${title}"></div>
+            <div class="card-body">
+        <form th:action="@{/views/save}" th:object="${event}" method="post">
+
+            <div class="form-group row">
+                <label class="col-md-2" for="id">Id</label>
+                <input type="number" th:field="*{id}" class="form-control form-control-sm col-md-4" id="id">
+                <small></small>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2" for="date">Date</label>
+                <input type="date" th:field="*{date}" class="form-control form-control-sm col-md-4" id="date">
+                <small></small>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2" for="lat">Latitude</label>
+                <input type="number" th:field="*{lat}" max="9999" class="form-control form-control-sm col-md-4" id="lat">
+                <small></small>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2" for="lon">Longitude</label>
+                <input type="number" th:field="*{lon}" max="9999" class="form-control form-control-sm col-md-4" id="lon">
+                <small></small>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2" for="city">City</label>
+                <input type="text" th:field="*{city}" class="form-control form-control-sm col-md-4" id="city">
+                <small></small>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2" for="state">State</label>
+                <input type="text" th:field="*{state}" class="form-control form-control-sm col-md-4" id="state">
+                <small></small>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2" for="temperature">Temperature</label>
+                <input type="number" step="0.0001" th:field="*{temperature}" max="9999" class="form-control form-control-sm col-md-4" id="temperature">
+                <small></small>
+            </div>
+
+            <div class="card-footer bg-dark">
+                <input type="submit" class="btn btn-primary btn-sm"/>
+            </div>
+
+        </form>
+    </div>
+        </div>
+    </div>
+
+    <footer th:replace="temp/template :: footer"></footer>
+</body>
+</html>
