@@ -1,7 +1,8 @@
 package com.juan.finalthesis.controller;
 
+import com.juan.finalthesis.model.Message;
 import com.juan.finalthesis.model.User;
-import com.juan.finalthesis.services.UserSerrvice;
+import com.juan.finalthesis.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     @Autowired
-    UserSerrvice serrvice;
+    UserService service;
 
     @Autowired
     User userToRecord;
@@ -29,7 +30,7 @@ public class UserController {
 
     @PostMapping("/save")
     public String save(@ModelAttribute User user) {
-        serrvice.save(user);
-        return "redirect:home";
+        service.save(user);
+        return "redirect:/home/";
     }
 }

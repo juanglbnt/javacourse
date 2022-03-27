@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Send</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+<div class="container">
+    <div class="card bg-light">
+        <div class="card-header bg-dark text-white" th:text="${title}"></div>
+        <div class="card-body">
+
+            <form th:action="@{/messages/save}" th:object="${message}" method="post">
+
+                <div class="form-group row">
+                    <label for="sender" class="col-md-2">User</label>
+                    <select th:field="*{sender}" class="form-control form-control-sm col-md-4" id="sender">
+                        <option
+                            th:each="user:${users}"
+                            th:value="${user.username}"
+                            th:text="${user.username}"
+                        />
+                    </select>
+                </div>
+
+                <div class="form-group row">
+                    <label for="subject" class="col-md-2">Subject</label>
+                   <input type="text" th:field="*{subject}" class="form-control form-control-sm col-md-4" id="subject">
+                </div>
+
+                <div class="form-group row">
+                    <label for="body" class="col-md-2">Body</label>
+                    <textarea th:field="*{body}" id="body" rows="6" cols="80"></textarea>
+                    <!-- <input type="text" th:field="*{body}" class="form-control form-control-sm col-md-4" id="body"> -->
+                </div>
+
+
+                <div>
+                    <input type="submit" class="btn btn-primary btn-sm">
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">User</th>
+                <th scope="col">Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${users}">
+                <th scope="row" th:text="${user.username}"></th>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.lastName}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-fade" id="addReceiver" tabindex="-1" role="dialog"
+        aria-labelledby="addReceiver" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <form id="recipients" th:object="${userSend}" th:action="@{messages/addReceiver}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="receiverAdd">Add receiver</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" id="username" th:field="${userSend.username}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="add receiver">
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+<div class="alert-danger text-center" th:if="${recipientsErrorMessage}" th:text="${recipientsErrorMessage}">No user</div>
+
+</body>
+</html>

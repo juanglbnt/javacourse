@@ -14,28 +14,37 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    private String userName;
+    private String username;
+    @Column(nullable = false)
     private String name;
     private String lastName;
     private int idDocNumber;
     private String address;
     private int zipCode;
     private String state;
-    private String country;
+    private String city;
+    @Column(nullable = false)
+    private String password;
 
     public User() {
 
     }
 
-    public User(String userName, String name, String lastName, int idDocNumber, String address,
-                int zipCode, String state, String country) {
-        this.userName = userName;
+    public User(String userName, String name, String lastName, int idDocNumber,
+                String address, int zipCode, String state, String city, String password) {
+        this.username = userName;
         this.name = name;
         this.lastName = lastName;
         this.idDocNumber = idDocNumber;
         this.address = address;
         this.zipCode = zipCode;
         this.state = state;
-        this.country = country;
+        this.city = city;
+        this.password = password;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 }
