@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Copy To</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+    <div class="container">
+        <div class="card bg-light">
+            <div class="card-header bg-dark text-white" th:text="${title}"></div>
+            <div class="card-body">
+
+                <form th:action="@{/inbox/copy}" th:object="${message}" method="post">
+
+                    <div class="form-group row">
+                        <label for="receiver" class="col-md-2">To</label>
+                        <select th:field="*{receiver}" class="form-control form-control-sm col-md-4" id="receiver">
+                            <option
+                                    th:each="user:${users}"
+                                    th:value="${user.username}"
+                                    th:text="${user.username}"
+                            />
+                        </select>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn btn-primary btn-sm">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+<footer th:replace="temp/template :: footer"></footer>
+</body>
+</html>

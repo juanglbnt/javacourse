@@ -1,7 +1,9 @@
 package com.juan.finalthesis.controller;
 
+import com.juan.finalthesis.model.Inbox;
 import com.juan.finalthesis.model.Message;
 import com.juan.finalthesis.model.User;
+import com.juan.finalthesis.services.InboxService;
 import com.juan.finalthesis.services.MessageService;
 import com.juan.finalthesis.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,37 +25,30 @@ public class MessageController {
     @Autowired
     UserService userService;
     @Autowired
-    User user;
-
+    Message message;
     @Autowired
-    Message messageToSend;
+    Inbox inbox;
 
     @GetMapping("/create")
-    public String message(Model model) {
-        List<User> listOfUsers = userService.getAllUser();
-        model.addAttribute("title", "New Message");
-        model.addAttribute("message", messageToSend);
-        model.addAttribute("users", listOfUsers);
-        model.addAttribute("userSend", user);
+    public String create(Model model) {
+        List<User> users = userService.getAllUser();
+        model.addAttribute("title", "Send Message");
+        model.addAttribute("message", message);
+        model.addAttribute("users", users);
         return "/views/send";
     }
 
-    @PostMapping("/send")
-    public String send(@ModelAttribute Message message, Model model) {
-        message.setReceptors(userService.getAllUser());
-
-        try{
-            messageService.save(message);
-        }catch (Exception e) {
-            model.addAttribute("recipientsErrorMessage", e.getMessage());
-        }
-        //userService borrarTodos()
-        return "redirect:/messages";
+    @PostMapping("/save")
+    public String save(@ModelAttribute Message message) {
+        messageService.save(message);
+        return "redirect:/views/messages";
     }
 
-
-    @PostMapping("/addReceiver")
-    public void addReceiver() {
-
+    @GetMapping("/sent")
+    public String sent(Model model) {
+        List<Message> sentMessages = messageService.sent();
+        model.addAttribute("title", "sent");
+        model.addAttribute("list", sentMessages);
+        return "/views/sent";
     }
 }

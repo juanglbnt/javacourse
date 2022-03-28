@@ -1,11 +1,9 @@
 package com.juan.finalthesis.Relpositories;
 
-import com.juan.finalthesis.model.User;
+import com.juan.finalthesis.model.Inbox;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface InboxRepository extends JpaRepository<Inbox, Long> {
 }

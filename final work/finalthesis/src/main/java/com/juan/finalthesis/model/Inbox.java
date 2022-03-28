@@ -5,14 +5,13 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 
 @Entity
 @Data
 @Builder
 @Component
-@Table(name = "messages")
-public class Message {
+@Table(name = "inbox")
+public class Inbox {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +27,14 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "sender")
-    private User sender;
+    User sender;
 
-    public Message() {
+    public Inbox() {
 
     }
 
-    public Message(Long id, String identifier, String subject, String body,
-                   String copy, User receiver, User sender) {
+    public Inbox(Long id, String identifier, String subject,
+                 String body, String copy, User receiver, User sender) {
         this.id = id;
         this.identifier = identifier;
         this.subject = subject;
