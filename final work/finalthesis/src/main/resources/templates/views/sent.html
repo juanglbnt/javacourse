@@ -25,7 +25,7 @@
                 <td th:text="${message.receiver.username}"></td>
 
                 <td>
-                    <a class="btn btn-success btn-sm" th:href="@{/views/copy} + ${message.identifier}"
+                    <a class="btn btn-success btn-sm" th:href="@{/inbox/copy/} + ${message.identifier}"
                        th:text="'Send Copy'"></a>
                 </td>
 

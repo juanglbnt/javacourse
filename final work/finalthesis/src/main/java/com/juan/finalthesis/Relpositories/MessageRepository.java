@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    @Query("select * from message where identifier = ?")
+    //!! si funciona el query !!
+    //@Query("select p from Product p where p.id=:id")
+    @Query("select m from Message m where m.identifier=:identifier")
     public Message findByIdentifier(String identifier);
 }

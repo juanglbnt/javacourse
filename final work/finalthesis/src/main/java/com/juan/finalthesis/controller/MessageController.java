@@ -49,6 +49,7 @@ public class MessageController {
         List<Message> sentMessages = messageService.sent();
         model.addAttribute("title", "sent");
         model.addAttribute("list", sentMessages);
+        //System.out.println(messageService.findByIdentifier("YmSKEBXii6"));
         return "/views/sent";
     }
 }
