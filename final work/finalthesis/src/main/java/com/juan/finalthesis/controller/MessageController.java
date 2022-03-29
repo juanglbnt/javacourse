@@ -41,7 +41,7 @@ public class MessageController {
     @PostMapping("/save")
     public String save(@ModelAttribute Message message) {
         messageService.save(message);
-        return "redirect:/views/messages";
+        return "redirect:/messages/sent/";
     }
 
     @GetMapping("/sent")
