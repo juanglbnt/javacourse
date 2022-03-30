@@ -8,6 +8,11 @@
 </head>
 <body>
 
+    <div>
+    <a class="btn btn-sm" th:href="@{/inbox/}"
+       th:text="'Home'"></a>
+    </div>
+
     <div class="container">
         <h1 th:text="${title}"></h1>
         <table class="table table-striped" sec:authorize="isAuthenticated()">
@@ -20,7 +25,6 @@
             </thead>
             <tbody>
             <tr th:each="message:${list}">
-                <!-- <th scope="row" th:text="${record.id}"></th> -->
                 <td th:text="${message.subject}"></td>
                 <td th:text="${message.body}"></td>
                 <td th:text="${message.receiver.username}"></td>
@@ -30,11 +34,10 @@
                        th:text="'Send Copy'"></a>
                 </td>
 
-                <!--
                 <td>
-                    <a class="btn btn-danger btn-sm" th:href="@{/views/delete/} + ${record.id}"
-                       th:text="'Delete'"></a>
-                </td> -->
+                    <a class="btn btn-danger btn-sm" th:href="@{/messages/delete/} + ${message.id}"
+                       th:text="'Delete'" onclick="return confirm('delete message?');"></a>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -53,7 +53,14 @@ public class InboxController {
     @PostMapping("/sendCopy")
     public String sendCopy(@ModelAttribute Message message) {
         inboxService.copyMessage(message);
-        return "redirect:/views/sent";
+        return "redirect:/inbox/";
+    }
+
+    @GetMapping("/deleteIn/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        inboxService.delete(id);
+        System.out.println("deleted successfully");
+        return "redirect:/inbox/";
     }
 
 }

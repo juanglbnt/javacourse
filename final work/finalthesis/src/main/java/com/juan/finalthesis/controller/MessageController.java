@@ -9,10 +9,7 @@ import com.juan.finalthesis.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,14 +41,18 @@ public class MessageController {
         return "redirect:/messages/sent";
     }
 
-    //GENERAR CONSULTA PARA ESTO
     @GetMapping("/sent")
     public String sent(Model model) {
-        List<Message> sentMessages = messageService.sent();
         List<Message> sentBySender = messageService.findBySender(userService.userLoggedAsUserObject());
         model.addAttribute("title", "sent");
         model.addAttribute("list", sentBySender);
-        //System.out.println(messageService.findByIdentifier("YmSKEBXii6"));
         return "/views/sent";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        messageService.delete(id);
+        System.out.println("deleted successfully");
+        return "redirect:/messages/sent";
     }
 }

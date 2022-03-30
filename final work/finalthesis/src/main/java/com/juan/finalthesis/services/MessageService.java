@@ -40,6 +40,10 @@ public class MessageService {
         return repository.findByIdentifier(identifier);
     }
 
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
     public String generateIdentifier() {
         final int SIZE = 10;
         final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

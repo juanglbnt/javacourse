@@ -14,4 +14,7 @@ public interface InboxRepository extends JpaRepository<Inbox, Long> {
 
     @Query("select i from Inbox i where i.receiver=:receiver")
     List<Inbox> findByReceiver(User receiver);
+
+    @Query("select i from Inbox i where i.identifier=:identifier")
+    List<Inbox> findAllWithSameIdentifier(String identifier);
 }

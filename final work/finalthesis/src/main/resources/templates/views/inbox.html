@@ -29,6 +29,7 @@
             <th scope="col">subject</th>
             <th scope="col">Body</th>
             <th scope="col">From</th>
+            <th scope="col">Copy</th>
         </tr>
         </thead>
         <tbody>
@@ -37,10 +38,11 @@
             <td th:text="${message.subject}"></td>
             <td th:text="${message.body}"></td>
             <td th:text="${message.sender.username}"></td>
+            <td th:text="${message.copy}"></td>
 
             <td>
-                <!-- th:href="@{/views/delete/} + ${message.id}" -->
-                <a class="btn btn-danger btn-sm" th:text="'Delete'"></a>
+                <a class="btn btn-danger btn-sm" th:href="@{/inbox/deleteIn/} + ${message.id}"
+                   th:text="'Delete'" onclick="return confirm('delete message?');"></a>
             </td>
         </tr>
         </tbody>

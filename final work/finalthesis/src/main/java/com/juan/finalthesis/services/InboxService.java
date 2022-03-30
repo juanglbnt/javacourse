@@ -7,6 +7,7 @@ import com.juan.finalthesis.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,4 +41,18 @@ public class InboxService {
         return inboxRepository.findByReceiver(receiver);
     }
 
+    public void delete(Long id) {
+        inboxRepository.deleteById(id);
+    }
+
+    public String receiversOfOneMessage(String identifier) {
+        String receivers = "";
+        List<Inbox> messages = inboxRepository.findAllWithSameIdentifier(identifier);
+
+        for (int i = 0; i < messages.size(); i++) {
+            receivers += messages.get(i).getReceiver().getUsername();
+        }
+
+        return receivers;
+    }
 }
